@@ -465,6 +465,10 @@ SETTINGS						    *project-settings*
 You can set these variables in your vimrc file before the plugin is loaded to
 change its default behavior
 
+g:proj_file
+	Defines the default project file if none is specified.
+	Defaults to '~/.vimprojects'.
+
 g:proj_window_width
 	The width of the Project Window that the plugin attempts to maintain.
 	Default: 24
