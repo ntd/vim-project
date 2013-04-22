@@ -269,12 +269,12 @@ Map	Action ~
 
 <S-Return>
 \s
-	Same as <Return> but horizontally split the target window.
+	Same as <Return> but splitting the target window with g:proj_split.
 	<LocalLeader>s is provided for those terminals that don't recognize
 	<S-Return>.
 
 \S
-	Load all files in a project by doing horizontal splits.
+	Like \s, but working on all files in a project.
 
 <C-Return>
 \o
@@ -481,6 +481,10 @@ g:proj_window_increment
 	The increment by which to increase the width of the Project Window
 	when pressing <space> or clicking the <LeftMouse>. Default: 100
 	(See |project-mappings|.)
+
+g:proj_split
+	The command used for splitting buffers on \s and \S.
+	Default: 'sp' (horizontal splits).
 
 							       *project-flags*
 g:proj_flags

@@ -41,6 +41,9 @@ function! s:Project(filename) " <<<
             let g:proj_flags='imstb'            " Project default flags for everything else
         endif
     endif
+    if !exists('g:proj_split')
+        let g:proj_split='sp'                   " Default split command
+    endif
     if !exists("g:proj_running") || (bufwinnr(g:proj_running) == -1) " Open the Project Window
         exec 'silent vertical new '.filename
         if match(g:proj_flags, '\CF') == -1      " We're floating
@@ -924,7 +927,7 @@ function! s:Project(filename) " <<<
         let b:loadcount=0
         function! s:SpawnExec(infoline, fname, lineno, data)
             let winNr = winnr() "get ProjectWindow number
-            if s:OpenEntry2(a:lineno, a:infoline, a:fname, 'sp')
+            if s:OpenEntry2(a:lineno, a:infoline, a:fname, g:proj_split)
                 exec winNr."wincmd w"
                 let b:loadcount=b:loadcount+1
                 echon b:loadcount."\r"
@@ -1175,7 +1178,7 @@ function! s:Project(filename) " <<<
 
         " Mappings <<<
         nnoremap <buffer> <silent> <Return>   \|:call <SID>DoFoldOrOpenEntry('', 'e')<CR>
-        nnoremap <buffer> <silent> <S-Return> \|:call <SID>DoFoldOrOpenEntry('', 'sp')<CR>
+        nnoremap <buffer> <silent> <S-Return> \|:call <SID>DoFoldOrOpenEntry('', g:proj_split)<CR>
         nnoremap <buffer> <silent> <C-Return> \|:call <SID>DoFoldOrOpenEntry('silent! only', 'e')<CR>
         nnoremap <buffer> <silent> <LocalLeader>T \|:call <SID>DoFoldOrOpenEntry('', 'tabe')<CR>
         nmap     <buffer> <silent> <LocalLeader>s <S-Return>
@@ -1193,7 +1196,7 @@ function! s:Project(filename) " <<<
         nnoremap <buffer> <silent> <LocalLeader>g \|:call <SID>GrepAll(0, line('.'), "")<CR>
         nnoremap <buffer> <silent> <LocalLeader>G \|:call <SID>GrepAll(1, line('.'), "")<CR>
         nnoremap <buffer> <silent> <2-LeftMouse>   \|:call <SID>DoFoldOrOpenEntry('', 'e')<CR>
-        nnoremap <buffer> <silent> <S-2-LeftMouse> \|:call <SID>DoFoldOrOpenEntry('', 'sp')<CR>
+        nnoremap <buffer> <silent> <S-2-LeftMouse> \|:call <SID>DoFoldOrOpenEntry('', g:proj_split)<CR>
         nnoremap <buffer> <silent> <M-2-LeftMouse> <M-CR>
         nnoremap <buffer> <silent> <S-LeftMouse>   <LeftMouse>
         nmap     <buffer> <silent> <C-2-LeftMouse> <C-Return>
